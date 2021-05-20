@@ -27,9 +27,14 @@ router.post("/", async (req, res) => {
 })
 
 router.put("/:id", async (req, res) => {
+  const fav = !req.body.favorite
   try {
     res.json(
-      await Tune.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      await Tune.findByIdAndUpdate(
+        req.params.id,
+        { favorite: fav },
+        { new: true }
+      )
     )
   } catch (error) {
     res.status(400).json(error)
